@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: commonplace-private
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 server.py
+    healthCheckPath: /health
+    envVars:
+      - key: APP_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
